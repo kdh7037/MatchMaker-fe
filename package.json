@@ -1,0 +1,38 @@
+{
+  "name": "match-maker-fe",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev & npm run watch:tailwind",
+    "build": "npm run build:tailwind && next build",
+    "build:tailwind": "npx tailwindcss -i ./src/styles/global.css -o ./src/styles/dist/global.css -m",
+    "watch:tailwind": "npm run build:tailwind -- --watch",
+    "clean": "rm -rf .next node_modules",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm run lint"
+  },
+  "dependencies": {
+    "@next/font": "13.1.1",
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "eslint-config-next": "13.1.1",
+    "next": "13.1.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "recoil": "^0.7.6"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "eslint": "^8.30.0",
+    "eslint-config-standard-with-typescript": "^24.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.6.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.31.11",
+    "tailwindcss": "^3.2.4",
+    "typescript": "^4.9.4"
+  }
+}
