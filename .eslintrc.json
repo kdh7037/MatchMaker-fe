@@ -34,13 +34,13 @@
     "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-
+    "@typescript-eslint/no-unused-vars": "warn",
     "max-len": ["warn", {
       "code": 120,
       "ignoreUrls": true,
       "ignoreRegExpLiterals": true
     }],
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "multiline-comment-style": "off",
     "no-trailing-spaces": ["error", { "ignoreComments": true }],
     "eol-last": ["error", "always"],
