@@ -1,12 +1,14 @@
 import clsx from 'clsx';
-import {FC, InputHTMLAttributes, useId} from 'react';
+import {FC, InputHTMLAttributes, ReactNode, useId} from 'react';
 
 interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  children?: ReactNode;
 }
 
 const FormInput: FC<FormInputProps> = ({
   label,
+  children,
   ...inputProps
 }) => {
   const id = useId();
@@ -28,6 +30,7 @@ const FormInput: FC<FormInputProps> = ({
           inputProps.className
         )}
       />
+      {children}
     </div>
   );
 };
