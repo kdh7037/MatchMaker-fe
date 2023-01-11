@@ -1,18 +1,16 @@
-import {FC, ReactNode} from 'react';
+import Button, {ButtonProps} from '@components/button';
+import {FC} from 'react';
 
-interface SubmitButtonProps {
-  children: ReactNode
-}
-
-const SubmitButton: FC<SubmitButtonProps> = ({
-  children = '제출'
+const SubmitButton: FC<ButtonProps> = ({
+  children = '제출',
+  ...props
 }) => (
-  <button
+  <Button
+    {...props}
     type="submit"
-    className="px-4 py-2 mt-2 text-white bg-blue-600 rounded"
   >
     {children}
-  </button>
+  </Button>
 );
 
 export default SubmitButton;
