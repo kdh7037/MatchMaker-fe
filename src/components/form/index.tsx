@@ -16,7 +16,7 @@ const Form: FC<FormProps> = ({
     const form = e.currentTarget as HTMLFormElement;
     const formData = new FormData(form);
     onSubmit(Object.fromEntries(formData.entries()));
-  }, []);
+  }, [onSubmit]);
 
   return (
     <form onSubmit={submitHandler}>

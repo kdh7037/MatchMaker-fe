@@ -1,5 +1,6 @@
 import Layout from '@components/layout';
 import Popup from '@components/popup';
+import Toast from '@components/toast';
 import '@styles/dist/global.css';
 import type {AppProps} from 'next/app';
 import {RecoilRoot} from 'recoil';
@@ -10,6 +11,7 @@ export default function App({Component, pageProps}: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      <Toast />
       <Popup />
     </RecoilRoot>
   );

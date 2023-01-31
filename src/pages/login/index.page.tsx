@@ -8,7 +8,7 @@ const LoginPage = () => {
   };
 
   return (
-    <section className="container p-4 m-auto">
+    <>
       <h1 className="mb-8 text-3xl">
         로그인 페이지
       </h1>
@@ -27,7 +27,7 @@ const LoginPage = () => {
         />
         <SubmitButton>로그인</SubmitButton>
       </Form>
-    </section>
+    </>
   );
 };
 
