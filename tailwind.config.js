@@ -13,7 +13,23 @@ module.exports = {
       'xs': '460px',
       ...defaultTheme.screens,
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        showToast: {
+          from: {
+            opacity: 0,
+            transform: 'translateY(1rem)',
+          },
+          to: {
+            opacity: 1,
+            transform: 'translateY(0)',
+          },
+        }
+      },
+      animation: {
+        showToast: 'showToast 0.25s cubic-bezier(.15,.78,.25,.98)',
+      },
+    },
   },
   plugins: [],
 };
