@@ -9,7 +9,7 @@ const LoginPage = () => {
   };
 
   return (
-    <section className="container p-4 m-auto">
+    <>
       <a
         href="/"
         className="block underline text-slate-500"
@@ -92,7 +92,7 @@ const LoginPage = () => {
           완료
         </SubmitButton>
       </Form>
-    </section>
+    </>
   );
 };
 
