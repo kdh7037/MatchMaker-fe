@@ -2,7 +2,7 @@ import Form, {OnSubmitHandler} from '@components/form';
 import FormInput from '@components/form/input';
 import SubmitButton from '@components/form/submit';
 import Button from '@components/button';
-import { useState } from 'react';
+import {ChangeEventHandler, useState} from 'react';
 
 const MyPage = () => {
   const submitHandler: OnSubmitHandler = formData => {
@@ -12,7 +12,7 @@ const MyPage = () => {
   const [isNicknameFilled, setIsNicknameFilled] = useState(true);
   const [isEmailFilled, setIsEmailFilled] = useState(true);
 
-  const requestWrite = (e) => {
+  const requestWrite: ChangeEventHandler<HTMLInputElement> = (e) => {
     const inputName = e.target.name;
     const isInputFilled = e.target.value.length > 0;
 
