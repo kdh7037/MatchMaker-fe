@@ -13,18 +13,13 @@ const MyPage = () => {
   const [isEmailFilled, setIsEmailFilled] = useState(true);
 
   const requestWrite = (e) => {
-    if (e.target.name === "nickname") {
-      if (e.target.value.length > 0) {
-        setIsNicknameFilled(true);
-      } else {
-        setIsNicknameFilled(false);
-      }
-    } else if (e.target.name === "email") {
-      if (e.target.value.length > 0) {
-        setIsEmailFilled(true);
-      } else {
-        setIsEmailFilled(false);
-      }
+    const inputName = e.target.name;
+    const isInputFilled = e.target.value.length > 0;
+
+    if (inputName === 'nickname') {
+      setIsNicknameFilled(isInputFilled);
+    } else if (inputName === 'email') {
+      setIsEmailFilled(isInputFilled);
     }
   };
 
@@ -49,7 +44,7 @@ const MyPage = () => {
           placeholder="변경할 닉네임을 입력하세요."
           onChange={requestWrite}
         />
-        <p>{!isNicknameFilled ? "닉네임을 입력해주세요." : null}</p>
+        {!isNicknameFilled && <p>닉네임을 입력해주세요.</p>}
         <FormInput
           label="이메일"
           type="email"
@@ -57,7 +52,7 @@ const MyPage = () => {
           placeholder="변경할 이메일을 입력하세요."
           onChange={requestWrite}
         />
-        <p>{!isEmailFilled ? "이메일을 입력해주세요." : null}</p>
+        {!isEmailFilled && <p>이메일을 입력해주세요.</p>}
         <SubmitButton>수정</SubmitButton>
         <Button>돌아가기</Button>
       </Form>
