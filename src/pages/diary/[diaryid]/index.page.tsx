@@ -2,80 +2,104 @@ import Button from '@components/button';
 import Form, {OnSubmitHandler} from '@components/form';
 import FormInput from '@components/form/input';
 import SubmitButton from '@components/form/submit';
-import { useState } from "react";
+import {useState} from 'react';
 
+// for test
+const mockDiary = {
+  diaryId: 0,
+  author: 'string',
+  title: 'string',
+  contents: 'string',
+  likes: 0,
+  hates: 0,
+  createdAt: '2023-02-23T14:10:41.883Z',
+  comments: [{
+    commentId: 0,
+    author: 'string',
+    contents: 'string1',
+    createdAt: '2023-02-23T14:10:41.883Z'
+  }, {
+    commentId: 1,
+    author: 'string',
+    contents: 'string2',
+    createdAt: '2023-02-23T14:10:41.883Z'
+  }, {
+    commentId: 2,
+    author: 'string',
+    contents: 'string3',
+    createdAt: '2023-02-23T14:10:41.883Z'
+  }]
+};
+
+/** 댓글 목록 컴포넌트 */
+const CommentList = ({comments}: {comments: typeof mockDiary.comments}) => {
+  return (
+    <>
+      {comments.map(comment => (
+        <li key={comment.commentId}>
+          <div>
+            <div>{comment.author}</div>
+            <div>{comment.contents}</div>
+          </div>
+          <div>
+            <Button>좋아요</Button>
+          </div>
+          <div>
+            <Button>싫어요</Button>
+          </div>
+        </li>
+      ))}
+    </>
+  );
+};
+
+/** 다이어리 상세 페이지 */
 const DetailDiaryPage = () => {
   const submitHandler: OnSubmitHandler = formData => {
     console.log(formData);
   };
 
+  /** 버튼 클릭한 상태 */
+  const [reactionType, setReactionType] = useState<'like' | 'hate' | null>(null);
+  const isLiked = reactionType === 'like';
+  const isHated = reactionType === 'hate';
 
-  const clickLikesButton = (e) => {
-    if (!diaryHatesClickable) { // 싫어요 버튼이 비활성 상태인 경우 (== 좋아요 버튼을 누른 경우)
-      setDiaryLikesCount(diaryLikesCount - 1);
-      setDiaryHatesClickable(true);
-    } else { // 좋아요, 실어요 둘 다 안 누른 경우
-      setDiaryLikesCount(diaryLikesCount + 1);
-      setDiaryHatesClickable(false);
-    }
+  // 총 좋아요 수
+  const diaryLikes = 37 + (isLiked ? 1 : 0);
+  const diaryHates = 1 + (isHated ? 1 : 0);
+
+  const onClickLike = () => {
+    setReactionType(isLiked ? null : 'like');
   };
 
-  const clickHatesButton = (e) => {
-    if (!diaryLikesClickable) { // 좋아요 버튼이 비활성 상태인 경우 (== 싫어요 버튼을 누른 경우)
-      setDiaryHatesCount(diaryHatesCount - 1);
-      setDiaryLikesClickable(true);
-    } else { // 좋아요, 실어요 둘 다 안 누른 경우
-      setDiaryHatesCount(diaryHatesCount + 1);
-      setDiaryLikesClickable(false);
-    }
+  const onClickHate = () => {
+    setReactionType(isHated ? null : 'hate');
   };
-
-
-  const getDiaryTitle = () => {
-    return 'title';
-  };
-
-  const getDiaryAuthor = () => {
-    return 'author';
-  };
-
-  const getDiaryContents = () => {
-    return '일기 내용';
-  };
-
-  const getCommentAuthor = (userId: number) => {
-    return '사용자' + userId;
-  };
-
-  const getCommentContents = (commentId: number) => {
-    return '댓글 내용~~~~' + commentId;
-  };
-
-  const [diaryLikesCount, setDiaryLikesCount] = useState(0);
-  const [diaryHatesCount, setDiaryHatesCount] = useState(0);
-
-  const [diaryLikesClickable, setDiaryLikesClickable] = useState(true);
-  const [diaryHatesClickable, setDiaryHatesClickable] = useState(true);
 
   return (
     <>
       <div>
-        <h1 className="mb-8 text-3xl">{getDiaryTitle()}</h1>
-        <div>{getDiaryAuthor()}</div>
-        <p>{getDiaryContents()}</p>
-
+        <h1 className="mb-8 text-3xl">
+          {mockDiary.title}
+        </h1>
+        <div>
+          {mockDiary.author}
+        </div>
+        <p>
+          {mockDiary.contents}
+        </p>
         <div>
           <Button
             name="diaryLikes"
-            onClick={clickLikesButton}
-            disabled={!diaryLikesClickable}>
-            좋아요 {diaryLikesCount}
+            onClick={onClickLike}
+          >
+            좋아요 {diaryLikes}
           </Button>
           <Button
             name="diaryHates"
-            onClick={clickHatesButton}
-            disabled={!diaryHatesClickable}>
-            싫어요 {diaryHatesCount}
+            onClick={onClickHate}
+          >
+            싫어요 {diaryHates}
           </Button>
         </div>
       </div>
@@ -86,25 +110,17 @@ const DetailDiaryPage = () => {
 
       <div>
         <h2>댓글</h2>
-        <div>
-          <div>
-            <div>{getCommentAuthor(1)}</div>
-            <div>{getCommentContents(1)}</div>
-          </div>
-          <div>
-            <Button>좋아요</Button>11
-          </div>
-          <div>
-            <Button>싫어요</Button>11
-          </div>
-        </div>
+        <ol>
+          <CommentList comments={mockDiary.comments} />
+        </ol>
 
         <Form onSubmit={submitHandler}>
           <FormInput
             label="댓글"
             type="longtext"
             name="contents"
-            placeholder="댓글을 작성해주세요." />
+            placeholder="댓글을 작성해주세요."
+          />
           <SubmitButton>등록</SubmitButton>
         </Form>
       </div>
