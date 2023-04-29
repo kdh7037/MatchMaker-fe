@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const dotenv = require('dotenv');
 const NODE_ENV = process.env.NODE_ENV || 'development';
+const API_HOST = process.env.API_HOST || 'http://localhost';
 const {parsed: parsedEnv} = dotenv.config({path: `env/${NODE_ENV}.env`});
 
 /** @type {import('next').NextConfig} */
@@ -14,7 +15,7 @@ const nextConfig = {
   rewrites: async () => {
     return [{
       source: '/api/:slug',
-      destination: `${process.env.API_HOST}/:slug`,
+      destination: `${API_HOST}/:slug`,
     }];
   },
 };
